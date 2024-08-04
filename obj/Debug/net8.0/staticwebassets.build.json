@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "YnjMx4mNduKCwRBL8Fvf3bAsle/cZ0/vFZw/CilztjA=",
+  "Source": "Sozluk42",
+  "BasePath": "_content/Sozluk42",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Sozluk42/wwwroot",
+      "Source": "Sozluk42",
+      "ContentRoot": "/Users/goktay/Desktop/Sozluk42/wwwroot/",
+      "BasePath": "_content/Sozluk42",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
