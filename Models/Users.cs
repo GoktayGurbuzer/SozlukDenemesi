@@ -10,6 +10,6 @@ namespace Sozluk42.Models
         public string Password { get; set; }
         public ICollection<Entry> Entries { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<Like> Likes { get; set; } // Burada Likes ilişkisini ekliyoruz
+        public ICollection<Like> Likes { get; set; }
     }
 }

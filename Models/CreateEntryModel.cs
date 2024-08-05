@@ -9,8 +9,5 @@ namespace Sozluk42.Models
 
         [Required]
         public int TitleId { get; set; }
-
-        [Required]
-        public int UserId { get; set; }
     }
 }

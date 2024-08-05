@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sozluk42.Data;
 using Sozluk42.Models;
 using Sozluk42.Services;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Sozluk42.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly SozlukContext _context;
@@ -20,17 +23,51 @@ namespace Sozluk42.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel login)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserRegisterDto registerDto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(login.Password, user.Password))
+            if (await _context.Users.AnyAsync(u => u.Username == registerDto.Username))
             {
-                return Unauthorized(new { message = "Invalid credentials" });
+                return BadRequest("Username is already taken");
             }
 
-            var token = _tokenService.GenerateToken(user);
-            return Ok(new { token });
+            var user = new User
+            {
+                Username = registerDto.Username,
+                Email = registerDto.Email,
+                Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password)
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { userId = user.UserId, username = user.Username, email = user.Email });
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLoginDto loginDto)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == loginDto.Username);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+            {
+                return Unauthorized("Invalid username or password");
+            }
+
+            var token = _tokenService.CreateToken(user);
+            return Ok(new { userId = user.UserId, username = user.Username, email = user.Email, token });
+        }
+    }
+
+    public class UserRegisterDto
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class UserLoginDto
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
