@@ -125,14 +125,6 @@
 /Users/goktay/Desktop/Sozluk42/obj/Debug/net8.0/Sozluk42.pdb
 /Users/goktay/Desktop/Sozluk42/obj/Debug/net8.0/Sozluk42.genruntimeconfig.cache
 /Users/goktay/Desktop/Sozluk42/obj/Debug/net8.0/ref/Sozluk42.dll
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.csproj.AssemblyReference.cache
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.GeneratedMSBuildEditorConfig.editorconfig
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.AssemblyInfoInputs.cache
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.AssemblyInfo.cs
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.csproj.CoreCompileInputs.cache
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.MvcApplicationPartsAssemblyInfo.cs
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.MvcApplicationPartsAssemblyInfo.cache
-/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.sourcelink.json
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/appsettings.Development.json
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/appsettings.json
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/sozluk42-frontend/package-lock.json
@@ -237,6 +229,14 @@
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/goktay/Desktop/Sozluk42 2/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.csproj.AssemblyReference.cache
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.GeneratedMSBuildEditorConfig.editorconfig
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.AssemblyInfoInputs.cache
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.AssemblyInfo.cs
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.csproj.CoreCompileInputs.cache
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.MvcApplicationPartsAssemblyInfo.cs
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.MvcApplicationPartsAssemblyInfo.cache
+/Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/Sozluk42.sourcelink.json
 /Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/staticwebassets.build.json
 /Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/staticwebassets.development.json
 /Users/goktay/Desktop/Sozluk42 2/obj/Debug/net8.0/staticwebassets/msbuild.Sozluk42.Microsoft.AspNetCore.StaticWebAssets.props
