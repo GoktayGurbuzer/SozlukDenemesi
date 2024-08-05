@@ -1,21 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Sozluk42.Models
 {
     public class Comment
-    {
-        [Key]
-        public int CommentId { get; set; }
-        [Required]
-        public string? Content { get; set; }
-        [Required]
-        public int EntryId { get; set; }
-        [ForeignKey("EntryId")]
-        public Entry? Entry { get; set; }
-        [Required]
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User? User { get; set; }
-    }
+{
+    public int CommentId { get; set; }
+    public string Content { get; set; }
+    public int EntryId { get; set; }
+    public Entry Entry { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
+}
+
 }

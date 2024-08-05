@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sozluk42.Data;
 using Sozluk42.Models;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sozluk42.Controllers
@@ -18,29 +18,58 @@ namespace Sozluk42.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Like>>> GetLikes()
-        {
-            return await _context.Likes.Include(l => l.User).Include(l => l.Entry).ToListAsync();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> PostLike(Like like)
+        [Authorize]
+        public async Task<IActionResult> LikeEntry([FromBody] Like like)
         {
-            var existingLike = await _context.Likes
-                .FirstOrDefaultAsync(l => l.EntryId == like.EntryId && l.UserId == like.UserId);
-
-            if (existingLike != null)
+            if (like == null)
             {
-                _context.Likes.Remove(existingLike);
-                await _context.SaveChangesAsync();
-                return NoContent();
+                return BadRequest();
             }
 
             _context.Likes.Add(like);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLikes), new { id = like.LikeId }, like);
+            return Ok(like);
+        }
+
+        [HttpDelete("{entryId}/{userId}")]
+        [Authorize]
+        public async Task<IActionResult> UnlikeEntry(int entryId, int userId)
+        {
+            var like = await _context.Likes.FirstOrDefaultAsync(l => l.EntryId == entryId && l.UserId == userId);
+            if (like == null)
+            {
+                return NotFound();
+            }
+
+            _context.Likes.Remove(like);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("{entryId}")]
+        public async Task<IActionResult> GetLikes(int entryId)
+        {
+            var likes = await _context.Likes
+                .Include(l => l.User)
+                .Where(l => l.EntryId == entryId)
+                .ToListAsync();
+
+            if (likes == null)
+            {
+                return NotFound();
+            }
+
+            var likeList = likes.Select(l => new
+            {
+                l.LikeId,
+                l.UserId,
+                l.User.Username
+            });
+
+            return Ok(likeList);
         }
     }
 }

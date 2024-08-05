@@ -1,5 +1,4 @@
-@Sozluk42_HostAddress = http://localhost:5221
-
+@Sozluk42_HostAddress = http://localhost:5000
 GET {{Sozluk42_HostAddress}}/weatherforecast/
 Accept: application/json
 

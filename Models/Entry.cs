@@ -1,26 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Sozluk42.Models
 {
     public class Entry
     {
-        [Key]
         public int EntryId { get; set; }
-        
-        [Required]
         public string Content { get; set; }
-
-        [Required]
         public int TitleId { get; set; }
-
-        [JsonIgnore]
         public Title Title { get; set; }
-
-        [Required]
         public int UserId { get; set; }
-
-        [JsonIgnore]
         public User User { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Like> Likes { get; set; } // Burada Likes ilişkisini ekliyoruz
     }
 }

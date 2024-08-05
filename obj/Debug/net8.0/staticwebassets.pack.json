@@ -1,52 +1,52 @@
 {
   "Files": [
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/asset-manifest.json",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/asset-manifest.json",
       "PackagePath": "staticwebassets/asset-manifest.json"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/favicon.ico",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/index.html",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/index.html",
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/logo192.png",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/logo192.png",
       "PackagePath": "staticwebassets/logo192.png"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/logo512.png",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/logo512.png",
       "PackagePath": "staticwebassets/logo512.png"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/manifest.json",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/manifest.json",
       "PackagePath": "staticwebassets/manifest.json"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/robots.txt",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/robots.txt",
       "PackagePath": "staticwebassets/robots.txt"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/static/css/main.827102c7.css",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/static/css/main.827102c7.css",
       "PackagePath": "staticwebassets/static/css/main.827102c7.css"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/static/css/main.827102c7.css.map",
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/static/css/main.827102c7.css.map",
       "PackagePath": "staticwebassets/static/css/main.827102c7.css.map"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/static/js/main.d0cac246.js",
-      "PackagePath": "staticwebassets/static/js/main.d0cac246.js"
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/static/js/main.c382f5d0.js",
+      "PackagePath": "staticwebassets/static/js/main.c382f5d0.js"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/static/js/main.d0cac246.js.LICENSE.txt",
-      "PackagePath": "staticwebassets/static/js/main.d0cac246.js.LICENSE.txt"
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/static/js/main.c382f5d0.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/static/js/main.c382f5d0.js.LICENSE.txt"
     },
     {
-      "Id": "/Users/goktay/Desktop/Sozluk42/wwwroot/static/js/main.d0cac246.js.map",
-      "PackagePath": "staticwebassets/static/js/main.d0cac246.js.map"
+      "Id": "/Users/goktay/Desktop/Sozluk42 2/wwwroot/static/js/main.c382f5d0.js.map",
+      "PackagePath": "staticwebassets/static/js/main.c382f5d0.js.map"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Sozluk42.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sozluk42.Data;
 using Sozluk42.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,32 +19,54 @@ namespace Sozluk42.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddComment([FromBody] Comment comment)
         {
-            return await _context.Comments.Include(c => c.User).Include(c => c.Entry).ToListAsync();
+            if (comment == null)
+            {
+                return BadRequest();
+            }
+
+            var entry = await _context.Entries.FindAsync(comment.EntryId);
+            var user = await _context.Users.FindAsync(comment.UserId);
+
+            if (entry == null || user == null)
+            {
+                return BadRequest("Entry or User not found.");
+            }
+
+            comment.Entry = entry;
+            comment.User = user;
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return Ok(comment);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Comment>> GetComment(int id)
-        {
-            var comment = await _context.Comments.Include(c => c.User).Include(c => c.Entry).FirstOrDefaultAsync(c => c.CommentId == id);
 
-            if (comment == null)
+        [HttpGet("{entryId}")]
+        public async Task<IActionResult> GetCommentsByEntry(int entryId)
+        {
+            var comments = await _context.Comments
+                .Where(c => c.EntryId == entryId)
+                .Include(c => c.User)
+                .ToListAsync();
+
+            if (comments == null)
             {
                 return NotFound();
             }
 
-            return comment;
-        }
+            var commentList = comments.Select(c => new
+            {
+                c.CommentId,
+                c.Content,
+                AuthorUsername = c.User.Username
+            });
 
-        [HttpPost]
-        public async Task<ActionResult<Comment>> PostComment(Comment comment)
-        {
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetComment), new { id = comment.CommentId }, comment);
+            return Ok(commentList);
         }
     }
 }

@@ -108,8 +108,7 @@ namespace Sozluk42.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.HasKey("TitleId");
 
@@ -126,8 +125,7 @@ namespace Sozluk42.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -135,8 +133,7 @@ namespace Sozluk42.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 
@@ -146,13 +143,13 @@ namespace Sozluk42.Migrations
             modelBuilder.Entity("Sozluk42.Models.Comment", b =>
                 {
                     b.HasOne("Sozluk42.Models.Entry", "Entry")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("EntryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Sozluk42.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -171,7 +168,7 @@ namespace Sozluk42.Migrations
                         .IsRequired();
 
                     b.HasOne("Sozluk42.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Entries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -184,13 +181,13 @@ namespace Sozluk42.Migrations
             modelBuilder.Entity("Sozluk42.Models.Like", b =>
                 {
                     b.HasOne("Sozluk42.Models.Entry", "Entry")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("EntryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Sozluk42.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,9 +197,25 @@ namespace Sozluk42.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Sozluk42.Models.Entry", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("Sozluk42.Models.Title", b =>
                 {
                     b.Navigation("Entries");
+                });
+
+            modelBuilder.Entity("Sozluk42.Models.User", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Entries");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
