@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sozluk42.Data;
 using Sozluk42.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sozluk42.Controllers
 {
@@ -18,14 +16,8 @@ namespace Sozluk42.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Title>>> GetTitles()
-        {
-            return await _context.Titles.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Title>> GetTitle(int id)
+        [HttpGet("{id}/entries")]
+        public async Task<IActionResult> GetEntries(int id)
         {
             var title = await _context.Titles
                 .Include(t => t.Entries)
@@ -37,21 +29,53 @@ namespace Sozluk42.Controllers
                 return NotFound();
             }
 
-            return title;
+            var entries = title.Entries.Select(e => new 
+            {
+                e.EntryId,
+                e.Content,
+                e.TitleId, 
+                AuthorUsername = e.User.Username
+            }).ToList();
+
+            return Ok(new
+            {
+                TitleId = title.TitleId,
+                Name = title.Name,
+                Entries = entries
+            });
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Title>> CreateTitle([FromBody] Title title)
+        [HttpGet("{entryId}")]
+        public async Task<IActionResult> GetEntryDetails(int entryId)
         {
-            if (!ModelState.IsValid)
+            var entry = await _context.Entries
+                .Include(e => e.User)
+                .Include(e => e.Comments)
+                .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(e => e.EntryId == entryId);
+
+            if (entry == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            _context.Titles.Add(title);
-            await _context.SaveChangesAsync();
+            var entryDetails = new 
+            {
+                entry.EntryId,
+                entry.Content,
+                entry.TitleId,
+                AuthorUsername = entry.User.Username,
+                Comments = entry.Comments.Select(c => new 
+                {
+                    c.CommentId,
+                    c.Content,
+                    AuthorUsername = c.User.Username
+                }).ToList()
+            };
 
-            return CreatedAtAction(nameof(GetTitle), new { id = title.TitleId }, title);
-        }
+            return Ok(entryDetails);
+}
+
+
     }
 }

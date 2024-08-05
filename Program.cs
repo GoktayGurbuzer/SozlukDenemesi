@@ -23,6 +23,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", builder =>
     {
+        builder.WithOrigins("http://localhost:3000")
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials();
@@ -67,14 +68,15 @@ else
     app.UseExceptionHandler("/Home/Error");
 }
 
-app.UseHttpsRedirection();
-
 app.UseRouting();
 
 app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseDefaultFiles();
+app.UseStaticFiles(); 
 
 app.MapControllers();
 

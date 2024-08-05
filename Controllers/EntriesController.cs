@@ -26,7 +26,8 @@ namespace Sozluk42.Controllers
                 .Include(e => e.User)
                 .Select(e => new
                 {
-                    e.EntryId,
+                    EntryId = e.EntryId,
+                    e.TitleId,
                     e.Content,
                     TitleName = e.Title.Name,
                     AuthorUsername = e.User.Username
@@ -35,5 +36,37 @@ namespace Sozluk42.Controllers
 
             return Ok(entries);
         }
+
+        [HttpGet("{entryId}")]
+        public async Task<IActionResult> GetEntryDetails(int entryId)
+        {
+            var entry = await _context.Entries
+                .Include(e => e.User)
+                .Include(e => e.Comments)
+                .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(e => e.EntryId == entryId);
+
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            var entryDetails = new 
+            {
+                entry.EntryId,
+                entry.Content,
+                entry.TitleId,
+                AuthorUsername = entry.User.Username,
+                Comments = entry.Comments.Select(c => new 
+                {
+                    c.CommentId,
+                    c.Content,
+                    AuthorUsername = c.User.Username
+                }).ToList()
+            };
+
+            return Ok(entryDetails);
+        }
+
     }
 }
